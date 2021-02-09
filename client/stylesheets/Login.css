@@ -1,0 +1,40 @@
+/* ------Login Page----- */
+
+.loginPage {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginBg {
+    border-radius: 0.625rem;
+}
+
+.loginForm {
+    margin-left: 20px;
+    width: 350px;
+    height: 350px;
+    width: 20rem;
+    padding: 3rem;
+    box-sizing: border-box;
+    background: rgba(235, 235, 235, 0.685);
+    font-size: 20px;
+    color: #535353;
+    border-radius: 0.625rem;
+}
+
+.loginForm input {
+    width: 100%;
+    height: 25px;
+    border-radius: 1px;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.submitBtn input {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+}
