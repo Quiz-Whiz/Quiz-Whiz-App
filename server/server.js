@@ -4,6 +4,7 @@ const PORT = 3000;
 const path = require('path');
 const apiRouter = require('./api.js');
 
+app.use(express.static('client'));
 
 app.use(express.json());
 
