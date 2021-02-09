@@ -1,3 +1,5 @@
+# Typescript Compiled Files
+build/*
 # Logs
 logs
 *.log
