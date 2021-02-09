@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/Login.css';
 // import context
+import { GlobalContext } from '../context/GlobalContext';
 
 type UserInput = {
   user_name: string,
@@ -11,7 +12,9 @@ type UserInput = {
 };
 
 const Login: React.FC = React.memo(() => {
+  const { username, setUsername, rating, setRating } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
+  const history = useHistory();
 
   const onSubmit = (values : UserInput) => {
     console.log(values);
@@ -21,7 +24,22 @@ const Login: React.FC = React.memo(() => {
     };
     axios
       .post('/login', body)
-      .then((res : any) => console.log(res));
+      .then((res : any) => {
+        // if status
+        if (res.status !== 200) {
+          const loginForm = document.getElementsByClassName('loginForm')[0];
+          const div = document.createElement('div');
+          div.innerHTML = 'Username or Password incorrect';
+          loginForm.appendChild(div);
+        } else {
+          setRating(res.data[0].rating);
+          setUsername(values.user_name);
+          history.push('/mainpage');
+        }
+      })
+      .catch((error) => {
+        console.log({ ...error });
+      });
   };
   return (
     <div className="loginPage">
@@ -44,7 +62,7 @@ const Login: React.FC = React.memo(() => {
         <br />
         <Link className="signup_link" to="/signUp">Create an Account</Link>
         <br />
-        <Link className="signup_link" to="/homepage"> Continue as Guest </Link>
+        <Link className="main_link" to="/mainPage"> Continue as Guest </Link>
       </div>
     </div>
   );
