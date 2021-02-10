@@ -1,26 +1,31 @@
-import React, {useContext ,useEffect} from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import { render } from 'react-dom'; 
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 // import Login 
 import Login from './components/Login';
 // import SignUp
 // import MainPage 
+import MainPage from './components/MainPage';
 // import CreateGame
-// import JoinGame
+// import JoinGame (private)
+import JoinGame from './components/JoinGame';
 // import Lobby
 // import Game
 // import Results
 
 const App: React.FC = React.memo(() => (
   <Switch>
-    <Route path="/">
+    <Route exact path="/">
       <Login />
     </Route>
     <Route path="/signUp">
     </Route>
     <Route path="/mainPage">
+      <MainPage />
     </Route>
     <Route path="/createGame">
+    </Route>
+    <Route path="/joinGame">
+      <JoinGame />
     </Route>
     <Route path="/lobby">
     </Route>
