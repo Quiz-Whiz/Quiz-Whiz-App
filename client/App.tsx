@@ -7,14 +7,14 @@ import Login from './components/Login';
 // import MainPage
 // import CreateGame
 // import JoinGame
-// import Lobby
+import Lobby from './components/Lobby'
 // import Game
 // import Results
 
 const App: React.FC = React.memo(() => (
   <Switch>
     <Route path="/">
-      <Login />
+      <Lobby />
     </Route>
     <Route path="/signUp">
     </Route>

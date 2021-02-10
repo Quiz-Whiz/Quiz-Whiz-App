@@ -31,8 +31,7 @@ const Login: React.FC = React.memo(() => {
           gameForm.appendChild(div);
         } else {
           // import ws
-          ws(res.data);
-          console.log(res.status);
+          setSocket(ws(res.data));
         }
       })
       .catch((error) => {
