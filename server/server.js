@@ -3,6 +3,7 @@ const app = express();
 const PORT = 3000;
 const path = require('path');
 const apiRouter = require('./api.js');
+require('dotenv').config();
 
 app.use(express.static('client'));
 

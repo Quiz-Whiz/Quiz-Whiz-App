@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 exports.getSessionToken = (req, res, next) => {
-
+  
   fetch('https://opentdb.com/api_token.php?command=request')
   .then(response => response.json())
   .then(token => {

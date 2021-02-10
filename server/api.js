@@ -1,6 +1,7 @@
 const express = require('express');
 const { createUser, verifyUser } = require('./controllers/userController')
 const { getSessionToken, getQuestions } = require('./controllers/apiController');
+const { createGame } = require('./controllers/gameController');
 const router = express.Router();
 
 router.get('/getQuestions', getSessionToken, getQuestions, (req, res) => {
@@ -13,6 +14,10 @@ router.post('/signup', createUser, (req, res) => {
 
 router.post('/verifyUser', verifyUser, (req, res) => {
   res.status(200).json(res.locals.user)
+})
+
+router.get('/createGame', createGame, (req, res) => {
+  res.status(200).send('Game has been created')
 })
 
 module.exports = router; 
