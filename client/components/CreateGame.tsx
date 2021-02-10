@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/Login.css';
-import webSocket from 'ws';
 import { GlobalContext } from '../context/GlobalContext';
+import ws from '../webSocketClient';
 
 type UserInput = {
   category: string,
@@ -12,7 +12,7 @@ type UserInput = {
 };
 
 const Login: React.FC = React.memo(() => {
-  const { socket, setSocket, username, setUsername, rating, setRating } = useContext(GlobalContext);
+  const { setSocket } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 
@@ -30,9 +30,9 @@ const Login: React.FC = React.memo(() => {
           div.innerHTML = 'Unable to create a game try again';
           gameForm.appendChild(div);
         } else {
-          const ws = new webSocket(res.data[0]);
-          setSocket(ws);
-          history.push('/lobby');
+          // import ws
+          ws(res.data);
+          console.log(res.status);
         }
       })
       .catch((error) => {
