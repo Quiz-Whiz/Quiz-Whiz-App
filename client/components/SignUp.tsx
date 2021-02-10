@@ -1,9 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-// import context
+import { GlobalContext } from '../context/GlobalContext';
 
+const { username, setUsername, rating, setRating } = useContext(GlobalContext);
+
+const history = useHistory();
 type UserInput = {
   user_name: string,
   user_password: string,
@@ -21,14 +24,20 @@ const SignUp: React.FC = React.memo(() => {
       .post('/signup', body)
       .then((res : any) => {
         if (res.status !== 200) {
-          console.log(res);
+          const loginForm = document.getElementsByClassName('signupForm')[0];
+          const div = document.createElement('div');
+          div.innerHTML = 'Username taken';
+          loginForm.appendChild(div);
+        } else {
+          setRating(1000);
+          setUsername(values.user_name);
+          history.push('/mainpage');
         }
       });
   };
   return (
-    <div className="loginPage">
-
-      <div className="loginForm">
+    <div className="signupPage">
+      <div className="signupForm">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="user_name">
             Username
@@ -42,12 +51,14 @@ const SignUp: React.FC = React.memo(() => {
             <input className="generic_button" type="submit" />
           </div>
         </form>
-        Not registered?
         <br />
-        <Link className="signup_link" to="/signUp">Create an Account</Link>
-        <br />
-        <Link className="signup_link" to="/homepage"> Continue as Guest </Link>
+        {/* need to create a func for guests that generates random username
+          and sets rating to 1000
+        */}
+        <Link className="signup_link" to="/mainpage"> Continue as Guest </Link>
       </div>
     </div>
   );
 });
+
+export default SignUp;
