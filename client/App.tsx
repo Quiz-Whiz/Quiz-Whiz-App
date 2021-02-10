@@ -1,10 +1,10 @@
 import React, {useContext ,useEffect} from 'react';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import { render } from 'react-dom'; 
-// import Login 
+import { render } from 'react-dom';
+// import Login
 import Login from './components/Login';
 // import SignUp
-// import MainPage 
+// import MainPage
 // import CreateGame
 // import JoinGame
 // import Lobby

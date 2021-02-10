@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { GlobalContext } from '../context/DashboardContext';
+import { GlobalContext } from '../context/GlobalContext';
 
 const { username, setUsername, rating, setRating } = useContext(GlobalContext);
 
@@ -24,7 +24,7 @@ const SignUp: React.FC = React.memo(() => {
       .post('/signup', body)
       .then((res : any) => {
         if (res.status !== 200) {
-          const loginForm = document.getElementsByClassName('loginForm')[0];
+          const loginForm = document.getElementsByClassName('signupForm')[0];
           const div = document.createElement('div');
           div.innerHTML = 'Username taken';
           loginForm.appendChild(div);
@@ -36,8 +36,8 @@ const SignUp: React.FC = React.memo(() => {
       });
   };
   return (
-    <div className="loginPage">
-      <div className="loginForm">
+    <div className="signupPage">
+      <div className="signupForm">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="user_name">
             Username
@@ -52,6 +52,9 @@ const SignUp: React.FC = React.memo(() => {
           </div>
         </form>
         <br />
+        {/* need to create a func for guests that generates random username
+          and sets rating to 1000
+        */}
         <Link className="signup_link" to="/mainpage"> Continue as Guest </Link>
       </div>
     </div>
