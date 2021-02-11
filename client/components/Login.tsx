@@ -35,7 +35,7 @@ const Login: React.FC = React.memo(() => {
         } else {
           setRating(res.data[0].rating);
           setUsername(values.user_name);
-          history.push('/mainpage');
+          history.push('/mainPage');
         }
       })
       .catch((error) => {

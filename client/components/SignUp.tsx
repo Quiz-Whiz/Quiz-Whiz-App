@@ -54,7 +54,7 @@ const SignUp: React.FC = React.memo(() => {
         {/* need to create a func for guests that generates random username
           and sets rating to 1000
         */}
-        <Link className="signup_link" to="/mainpage"> Continue as Guest </Link>
+        <Link className="signup_link" to="/mainPage"> Continue as Guest </Link>
       </div>
     </div>
   );
