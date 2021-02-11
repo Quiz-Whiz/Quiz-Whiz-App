@@ -16,7 +16,9 @@ const Login: React.FC = React.memo(() => {
   const { username, setUsername, rating, setRating } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
-
+  const pushHistory = () => {
+    history.push('/mainPage');
+  }
   const onSubmit = (values : UserInput) => {
     console.log(values);
     const body = {
@@ -24,7 +26,7 @@ const Login: React.FC = React.memo(() => {
       password: values.user_password,
     };
     axios
-      .post('/login', body)
+      .post('/api/login', body)
       .then((res : any) => {
         // if status
         if (res.status !== 200) {
@@ -33,9 +35,10 @@ const Login: React.FC = React.memo(() => {
           div.innerHTML = 'Username or Password incorrect';
           loginForm.appendChild(div);
         } else {
-          setRating(res.data[0].rating);
+          setTimeout(pushHistory, 500);
+          console.log(res.data);
+          setRating(res.data.rating);
           setUsername(values.user_name);
-          history.push('/mainpage');
         }
       })
       .catch((error) => {

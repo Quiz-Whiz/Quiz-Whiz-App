@@ -6,11 +6,12 @@ import { GlobalContext } from '../context/GlobalContext';
 
 const MainPage: React.FC = React.memo(() => {
   const { username } = useContext(GlobalContext);
-
+  console.log("username", username);
   return (
     <div className="mainPage">
       <div className="mainContainer">
-        Hello Quiz Whiz
+        Hello:
+        {username}
         <br />
         Current Ranking: Over 9000
         <br />

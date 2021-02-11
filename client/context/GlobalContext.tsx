@@ -20,7 +20,7 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
   const [globalRedirect, setGlobalRedirect] = useState<boolean>(false);
   const [host, setHost] = useState<boolean>(false);
   const [endGame, setEndGame] = useState<boolean>(true);
-  const [rating, setRating] = useState<number>(1000);
+  const [rating, setRating] = useState<number>(1);
   const [username, setUsername] = useState<string>('');
 
   const value = {
