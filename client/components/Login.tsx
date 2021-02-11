@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/Login.css';
-// import context
+import logo from '../assets/logo.png';
+// import context;
 import { GlobalContext } from '../context/GlobalContext';
 
 type UserInput = {
@@ -43,8 +44,17 @@ const Login: React.FC = React.memo(() => {
   };
   return (
     <div className="loginPage">
-
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="loginForm">
+        <div className="loginHeader">
+          <img src={logo} width="260px" height="100px" alt="Logo" />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="user_name">
             Username

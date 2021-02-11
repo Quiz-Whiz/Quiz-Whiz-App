@@ -1,24 +1,15 @@
-/* ------Login Page----- */
-
-.loginPage {
+.joinGame {
     margin-top: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.loginBg {
+.joinBg {
     border-radius: 0.625rem;
 }
 
-.loginHeader {
-    text-align: center;
-    font-size: 40px;
-    margin-bottom: 90px;
-    margin-left: -10px;
-}
-
-.loginForm {
+.joinForm {
     height: 790px;
     width: 20rem;
     padding: 3rem;
@@ -29,7 +20,7 @@
     border-radius: 0.625rem;
 }
 
-.loginForm input {
+.joinForm input {
     width: 100%;
     height: 40px;
     border-radius: 1px;
@@ -44,13 +35,5 @@
     margin-top: 10px;
     margin-bottom: 10px;
     border-radius: 7px;
-    font-size: 25px;
-}
-
-.signup_link {
-    font-size: 25px;
-}
-
-.main_link {
     font-size: 25px;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState } from 'react';
 
 export const GlobalContext = React.createContext<any>(null);
@@ -13,10 +14,10 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
   const [name, setName] = useState<string>('');
   const [question, setQuestion] = useState<string>('');
   const [answers, setAnswers] = useState<any>({});
-  const [results, setResults] = useState<any>([]);
+  const [results, setResults] = useState<any>([{ username: 'cole', score: 10 }, { username: 'vince', score: 420 }, { username: 'derek', score: 69 }]);
   const [globalRedirect, setGlobalRedirect] = useState<boolean>(false);
   const [host, setHost] = useState<boolean>(false);
-  const [endGame, setEndGame] = useState<number>(0);
+  const [endGame, setEndGame] = useState<boolean>(true);
   const [rating, setRating] = useState<number>(1000);
   const [username, setUsername] = useState<string>('');
 
