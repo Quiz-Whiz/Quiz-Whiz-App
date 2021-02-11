@@ -18,6 +18,7 @@ class Game {
 genID() {
   return Math.floor(Math.random() * 100000);
 }
+
 //gen websocket server
 createServer(port) {
   const app = express();
@@ -33,29 +34,56 @@ createServer(port) {
 
         case "joinGame":
           this.addPlayer(message.data)
-          const playersArray = Object.values(this.players).map(val => val.username)
-          const reply = {
+          const joinReply = {
             type: "joinGame",
-            data: playersArray
+            data: Object.keys(this.players)
           }
-          console.log(playersArray);
+          console.log(this.players)
           wss.clients.forEach(client => {
-            client.send(JSON.stringify(reply));
+            client.send(JSON.stringify(joinReply));
+          })
+          return;
+
+        case "leaveGame":
+          this.removePlayer(message.data)
+          const leaveReply = {
+            type: "leaveGame",
+            data: Object.keys(this.players)
+          }
+          console.log(this.players)
+          wss.clients.forEach(client => {
+            client.send(JSON.stringify(leaveReply));
           })
           return;
         
         case "startGame":
-          //array index = 0
-          //array index++
-          //return getCurrentQ()
+          let firstRound = this.sendRound();
+          wss.clients.forEach(client => {
+            client.send(JSON.stringify(firstRound));
+          })
+          return;
+
+        case "answer":
+          
+          this.playerAnswers++;
+          
+          //increment score for correct answer
+          if (message.data.answer) {
+            this.players[message.data.username].score += 10;
+          }
+          
+          //if game isn't over, send new question, and results
+          if (this.playerAnswers >= this.playerCount) {
+            let result = this.sendRound()
+            wss.clients.forEach(client => {
+              client.send(JSON.stringify(result));
+            })
+            this.playerAnswers = 0;
+          }
+          
+          this.round++
           return;
         
-        case "results":
-          return;
-        
-        case "newRound":
-          return;
-  
         default: 
           return;
       }
@@ -70,8 +98,7 @@ createServer(port) {
 //addPlayer
 addPlayer(username) {
   
-  this.players[this.genID()] = {
-    username, 
+  this.players[username] = {
     score: 0,
     answer: null,
   };
@@ -80,27 +107,26 @@ addPlayer(username) {
 
 
 //removePlayer
-removePlayer(id) {
-  delete this.players[id];
+removePlayer(username) {
+  delete this.players[username];
   this.playerCount--;
 }
 
-//getCurrQ
-getCurrentQ() {
-  return this.questions[this.round];
-}
-
-//nextRound
-nextRound() {
-  this.playerAnswers = 0;
-  this.round++;
-}
-
-//eHA
-//cPA
-//getS
-updateScore(id, correct) {
-  correct? this.players[id].score += 10 : this.players[id].score -= 5;
+sendRound() {
+  let currentScores = [];
+  for (const player in this.players) {
+    currentScores.push({
+      username: player,
+      score: player.score
+    })
+  }
+  const newRound = {
+    type: 'newRound',
+    data: this.questions[this.round] || null,
+    scores: currentScores,
+    isGameOver: this.isGameOver()
+  }
+  return newRound;
 }
 
 //iGO
