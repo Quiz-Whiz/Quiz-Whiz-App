@@ -9,9 +9,10 @@ module.exports = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
+    disableHostCheck: true,
     publicPath: '/',
     proxy: {
-      '/api/**': 'http://localhost:3000/'
+      '/api/**': 'http://localhost:3000/',
     },
   },
   module: {

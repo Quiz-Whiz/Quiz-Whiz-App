@@ -19,7 +19,7 @@ const JoinGame: React.FC = React.memo(() => {
   const onSubmit = (values : AccessCode) => {
     console.log(values);
     const code = {
-      access_code: values.access_code
+      access_code: values.access_code,
     };
     axios
       .post('/joinGame', code)
