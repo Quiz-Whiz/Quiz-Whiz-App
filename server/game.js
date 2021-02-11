@@ -2,10 +2,11 @@ const http = require('http');
 const express = require('express')
 const cors = require('cors')
 const ws = require('ws');
+const { createGame } = require('./controllers/gameController');
 
 class Game {
-  constructor(questions) {
-    this.server = this.createServer();
+  constructor(questions, port) {
+    this.server = this.createServer(port);
     this.players = {};
     this.playerCount = 0;
     this.questions = questions;
@@ -18,19 +19,59 @@ genID() {
   return Math.floor(Math.random() * 100000);
 }
 //gen websocket server
-createServer() {
+createServer(port) {
   const app = express();
   const server = new http.Server(app);
   app.use(cors());
   const wss = new ws.Server({ server });
+  
+  wss.on('connection', (socket) => {
+    console.log(`Connected at ${port}!`)
+    socket.on('message', (message) => {
+      message = JSON.parse(message);
+      switch(message.type) {
+
+        case "joinGame":
+          this.addPlayer(message.data)
+          const playersArray = Object.values(this.players).map(val => val.username)
+          const reply = {
+            type: "joinGame",
+            data: playersArray
+          }
+          console.log(playersArray);
+          wss.clients.forEach(client => {
+            client.send(JSON.stringify(reply));
+          })
+          return;
+        
+        case "startGame":
+          //array index = 0
+          //array index++
+          //return getCurrentQ()
+          return;
+        
+        case "results":
+          return;
+        
+        case "newRound":
+          return;
+  
+        default: 
+          return;
+      }
+      
+    })
+  })
+  
+  server.listen(port)
+  return wss;
 }
 
 //addPlayer
 addPlayer(username) {
-
-  this.players[this.playerCount] = {
+  
+  this.players[this.genID()] = {
     username, 
-    id: this.genID(),
     score: 0,
     answer: null,
   };
@@ -65,7 +106,7 @@ updateScore(id, correct) {
 //iGO
 isGameOver() {
   return this.round >= this.questions.length;
-}
+  }
 }
 
 module.exports = Game;

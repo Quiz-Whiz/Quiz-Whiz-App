@@ -20,6 +20,18 @@ app.get('/', (req, res) => {
 //catch-all route handler--for unknown routes
 app.use((req, res) => res.sendStatus(404));
 
+//need global error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: "Express error handler caught unknown middleware error",
+    status: 500,
+    message: { err: "An error occurred" },
+  };
+  const errorObj = { ...defaultErr, ...err };
+  return res.status(errorObj.status).send(errorObj.message);
+});
+
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
 })

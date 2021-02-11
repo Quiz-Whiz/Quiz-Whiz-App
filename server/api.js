@@ -12,12 +12,12 @@ router.post('/signup', createUser, (req, res) => {
   res.status(200).send('User has been created.');
 })
 
-router.post('/verifyUser', verifyUser, (req, res) => {
+router.post('/login', verifyUser, (req, res) => {
   res.status(200).json(res.locals.user)
 })
 
 router.get('/createGame', createGame, (req, res) => {
-  res.status(200).send('Game has been created')
+  res.status(200).json(res.locals.port)
 })
 
 module.exports = router; 
