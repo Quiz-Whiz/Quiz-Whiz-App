@@ -4,16 +4,15 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { GlobalContext } from '../context/GlobalContext';
 
-const { username, setUsername, rating, setRating } = useContext(GlobalContext);
-
-const history = useHistory();
 type UserInput = {
   user_name: string,
   user_password: string,
 };
 
 const SignUp: React.FC = React.memo(() => {
+  const { username, setUsername, rating, setRating } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
+  const history = useHistory();
   const onSubmit = (values: UserInput) => {
     console.log(values);
     const body = {

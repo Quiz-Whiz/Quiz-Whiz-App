@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/JoinGame.css';
 import WebSocket from 'ws';
-// import context;
-// import { GlobalContext } from '../context/GlobalContext';
+
+import { GlobalContext } from '../context/GlobalContext';
 
 type AccessCode = {
   access_code: number
