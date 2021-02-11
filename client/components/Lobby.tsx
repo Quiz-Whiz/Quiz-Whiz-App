@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 const Lobby = (players:string[]) => {
-  const { socket, host } = useContext(GlobalContext);
+  const { socket, host, accessCode } = useContext(GlobalContext);
   let startButton = (<br />);
   const onSubmit = () => {
     const msg = {
@@ -23,17 +23,22 @@ const Lobby = (players:string[]) => {
   if (host === true) {
     startButton = (
       <label htmlFor="startGame">
-        Start Game
-        <input type="button" className="buttons" id="startGame" onClick={() => onSubmit()} />
+        <input type="button" value="Start Game" className="buttons" id="startGame" onClick={() => onSubmit()} />
       </label>
     );
   }
   return (
     <div className="lobbyPage">
-      <div id="users">
-        {users}
+      <div className="lobbyContainer">
+        <div className="lobbyHeader">
+          Lobby:
+          {accessCode}
+        </div>
+        <div id="users">
+          {users}
+        </div>
+        {startButton}
       </div>
-      {startButton}
     </div>
   );
 };

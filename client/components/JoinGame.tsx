@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/JoinGame.css';
-import WebSocket from 'ws';
 
 import { GlobalContext } from '../context/GlobalContext';
 
@@ -12,7 +11,7 @@ type AccessCode = {
 };
 
 const JoinGame: React.FC = React.memo(() => {
-  const { setSocket } = useContext(GlobalContext);
+  const { setSocket, username, setPlayers, setAccessCode } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 
@@ -22,7 +21,7 @@ const JoinGame: React.FC = React.memo(() => {
       access_code: values.access_code,
     };
     axios
-      .post('/joinGame', code)
+      .post('/api/joinPrivateGame', code)
       .then((res : any) => {
         // if status
         if (res.status !== 200) {
@@ -31,14 +30,31 @@ const JoinGame: React.FC = React.memo(() => {
           div.innerHTML = 'Error incorrect access code';
           loginForm.appendChild(div);
         } else {
-          const ws = new WebSocket(res.data[0]);
-          setSocket(ws);
-          ws.on('open', () => {
-            history.push('/lobby');
-          });
+          const port = res.data;
+          const IP = 'ws://76.214.40.140:';
+          const URLstring = IP + port;
+          setAccessCode(res.data.code);
+          console.log(URLstring);
+          const ws = new WebSocket(URLstring);
+          ws.onopen = () => {
+            setSocket(ws);
+            const msg = {
+              type: 'joinGame',
+              data: `${username}`,
+            };
+            ws.onmessage = (event:any) => {
+              const message = JSON.parse(event.data);
+              if (message.type === 'joinGame') {
+                setPlayers(message.data);
+              }
+            };
+            ws.send(JSON.stringify(msg));
+            history.push('/game');
+          };
         }
       })
       .catch((error) => {
+        console.log('catch error');
         console.log({ ...error });
       });
   };

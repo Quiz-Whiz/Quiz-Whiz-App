@@ -1,45 +1,43 @@
-/* ------Login Page----- */
-
-* {
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-.mainPage {
+.signupPage {
+    background: #2F3E46;
     margin-top: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
-    align-self: center;
 }
 
-#rating {
-    color: rgb(107, 40, 148);
-    font-size: 48px;
-}
-
-.mainContainer {
-    /* width: 375px; */
-    text-align: center;
+.signupForm {
     height: 790px;
     width: 20rem;
     padding: 3rem;
     box-sizing: border-box;
     background: #2F3E46;
-    font-size: 30px;
+    font-size: 20px;
     color: white;
     border-radius: 0.625rem;
 }
 
-
-/* .lo input {
+.signupForm input {
     width: 100%;
-    height: 25px;
-    border-radius: 1px;
+    height: 40px;
+    border-radius: 5px;
     font-size: 15px;
     margin-bottom: 10px;
-} */
+    font-size: 30px;
+}
 
-.mainPgBtn {
+.submitBtn input {
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    font-size: 25px;
+    color: #262d30;
+}
+
+
+/* form input {
     width: 100%;
     height: 60px;
     margin-top: 30px;
@@ -47,5 +45,7 @@
     border-radius: 7px;
     font-size: 20px;
     background: rgb(145, 149, 150);
-    color: #262d30;
-}
+    color: #262d30; */
+
+
+/* } */

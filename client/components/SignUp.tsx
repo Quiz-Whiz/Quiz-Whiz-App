@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { GlobalContext } from '../context/GlobalContext';
+import '../stylesheets/SignUp.css';
 
 type UserInput = {
   user_name: string,
@@ -20,7 +21,7 @@ const SignUp: React.FC = React.memo(() => {
       password: values.user_password,
     };
     axios
-      .post('/signup', body)
+      .post('/api/signup', body)
       .then((res : any) => {
         if (res.status !== 200) {
           const loginForm = document.getElementsByClassName('signupForm')[0];

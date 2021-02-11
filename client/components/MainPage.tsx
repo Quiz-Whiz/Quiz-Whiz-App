@@ -5,18 +5,20 @@ import '../stylesheets/MainPage.css';
 import { GlobalContext } from '../context/GlobalContext';
 
 const MainPage: React.FC = React.memo(() => {
-  const { username } = useContext(GlobalContext);
-
+  const { username, rating } = useContext(GlobalContext);
+  console.log("username", username);
   return (
     <div className="mainPage">
       <div className="mainContainer">
-        Hello Quiz Whiz
-        <br />
-        Current Ranking: Over 9000
-        <br />
+        Hello,
+        {username}
         <br />
         <br />
+        Current Ranking:
         <br />
+        <br />
+        <br />
+        <div id="rating">{rating}</div>
         <br />
         <br />
         <br />

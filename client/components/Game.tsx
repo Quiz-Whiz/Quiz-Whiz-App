@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 import Lobby from './Lobby';
 import Result from './Results';
+import GameRound from './GameRound';
 
 const Game: React.FC = () => {
-  const { socket, players, setPlayers, results, setResults, showResults, setShowResults, question, setQuestion, answers, setAnswers , setEndGame, showGame, setShowGame } = useContext(GlobalContext);
-  let fakePlayers = ['derek', 'cole', 'vince', 'chance', 'RonaldMcdonalds'];
+  const { socket, players, setPlayers, results, setResults, showResults, setShowResults, setQuestion, answer, setAnswer, setIncorrectAnswers, showGame, setShowGame } = useContext(GlobalContext);
 
   const gameTime = () => {
     setShowGame(true);
@@ -16,28 +16,61 @@ const Game: React.FC = () => {
     setShowResults(false);
   };
 
+  // {
+  //   type: 'firstRound || newRound',
+  //   data:  {
+    //     "category": "Entertainment: Japanese Anime & Manga",
+    //     "type": "multiple",
+    //     "difficulty": "easy",
+    //     "question": "What is the age of Ash Ketchum in Pokemon when he starts his journey?",
+    //     "correct_answer": "10",
+    //     "incorrect_answers": [
+    //         "11",
+    //         "12",
+    //         "9"
+    //     ]
+    // },
+  //   scores: [],
+  //   isGameOver: this.isGameOver()
+  // }
+  const updateResultsAndQuestions = (message:any) => {
+    setQuestion(message.data.question);
+    setAnswer(message.data.correct_answer);
+    setIncorrectAnswers(message.data.incorrect_answers);
+    setResults(message.scores);
+  };
+
   socket.onmessage = (event:any) => {
     console.log(event);
     const message = JSON.parse(event.data);
     console.log(message);
-    if (message.type === 'results') {
-      console.log('SUP IN RESULTS');
+    if (message.type === 'newRound') {
+      console.log('SUP IN new Round');
       setShowGame(false);
       setShowResults(true);
-      setResults([{ username: 'cole', score: 10 }, { username: 'vince', score: 420 }, { username: 'derek', score: 69 }])
+      updateResultsAndQuestions(message);
       if (message.isGameOver) {
         setTimeout(gameOver, 4000);
       } else {
         setTimeout(gameTime, 4000);
       }
-      // add end of game check
+    }
+    if (message.type === 'firstRound') {
+      updateResultsAndQuestions(message);
+      setShowGame(true);
+    }
+    if (message.type === 'joinGame') {
+      setPlayers(message.data);
     }
   };
   if (showResults) {
     console.log('Rendering Results');
     return Result(results);
   }
-  return Lobby(fakePlayers);
+  if (showGame) {
+    return GameRound(answer);
+  }
+  return Lobby(players);
 };
 
 export default Game;

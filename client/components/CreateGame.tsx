@@ -11,37 +11,55 @@ type UserInput = {
 };
 
 const CreateGame: React.FC = React.memo(() => {
-  const { setSocket, setHost } = useContext(GlobalContext);
+  const { setSocket, setHost, username, setPlayers, setAccessCode} = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 
   const onSubmit = (values : UserInput) => {
     const body = {
-      username: values.category,
-      number_of_questions: values.number_of_questions,
+      // category not mapped yet
+      category: values.category,
+      amount: values.number_of_questions,
     };
-    const ws = new WebSocket('ws://76.214.40.140:3000');
-    ws.onopen = () => {
-      setSocket(ws);
-      setHost(true);
-      history.push('/game');
-    };
-    // axios
-    //   .post('/createGame', body)
-    //   .then((res : any) => {
-    //     if (res.status !== 200) {
-    //       const gameForm = document.getElementsByClassName('createGameForm')[0];
-    //       const div = document.createElement('div');
-    //       div.innerHTML = 'Unable to create a game try again';
-    //       gameForm.appendChild(div);
-    //     } else {
-    //       // import ws
-    //       setSocket(ws('wss://localhost:3000'));
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log({ ...error });
-    //   });
+    // ws://localhost:port
+    // const ws = new WebSocket('ws://76.214.40.140:3000');
+    // ws.onopen = () => {
+    //   setSocket(ws);
+    //   setHost(true);
+    //   history.push('/game');
+    // };
+    axios
+      .post('/api/createGame', body)
+      .then((res : any) => {
+        if (res.status !== 200) {
+          const gameForm = document.getElementsByClassName('createGameForm')[0];
+          const div = document.createElement('div');
+          div.innerHTML = 'Unable to create a game try again';
+          gameForm.appendChild(div);
+        } else {
+          // import ws
+          console.log(res);
+          setAccessCode(res.data.code);
+          const port = res.data.port;
+          const IP = 'ws://76.214.40.140:';
+          const URLstring = IP + port;
+          console.log(URLstring);
+          const ws = new WebSocket(URLstring);
+          ws.onopen = () => {
+            setSocket(ws);
+            setHost(true);
+            const msg = {
+              type: 'joinGame',
+              data: `${username}`,
+            };
+            ws.send(JSON.stringify(msg));
+            history.push('/game');
+          };
+        }
+      })
+      .catch((error) => {
+        console.log({ ...error });
+      });
   };
   return (
     <div className="createGamePage">
