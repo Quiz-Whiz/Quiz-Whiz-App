@@ -1,39 +1,22 @@
-import React, { useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { GlobalContext } from '../context/GlobalContext';
-import '../stylesheets/Results.css';
+import React from 'react';
 
-const Result: React.FC = React.memo(() => {
-  //declare context
-  const history = useHistory();
-  const { results, setResults, endGame, question, setQuestion } = useContext(GlobalContext);
-  useEffect(() => {
-    if (endGame === false) {
-      setTimeout(() => {
-        history.push('/game');
-      }, 4000);
-    }
-  });
-  const endGameBtn: JSX.Element = (
-    <Link className="returnLobby_link" to="/lobby">
-      <button className="endGamePgBtn" type="button">
-        Return to Lobby
-      </button>
-    </Link>
-  );
-  let temp:JSX.Element = (
-    <div>
-      <br />
-      <br />
-      <br />
-    </div>
-  );
-  const sortTable: any = results.sort((a: any, b: any) => b.score - a.score);
-  console.log(sortTable);
-  // for all the values
-  const tableOfResults:any = sortTable.map((el:any, index:any) => <p key={index}> {index + 1} : {el[Object.keys(el)[0]]} : {el[Object.keys(el)[1]]}</p>);
-  if (endGame === true) {
-    temp = endGameBtn;
+type Player = {
+  username: string,
+  score: number
+};
+const Result = (results:Player[]) => {
+  const scores:JSX.Element[] = [];
+  // sort up here
+  results.sort((a, b) => b.score - a.score);
+  for (let i = 0; i < results.length; i += 1) {
+    const score = (
+      <div>
+        { results[i].username }
+        :
+        {results[i].score}
+      </div>
+    );
+    scores.push(score);
   }
   return (
     <div className="resultsPage">
@@ -42,17 +25,16 @@ const Result: React.FC = React.memo(() => {
           Leader Board:
         </div>
         <br />
-        {tableOfResults}
+        {scores}
         <br />
         <br />
         <br />
         <br />
         <br />
         <br />
-        {temp}
       </div>
     </div>
   );
-});
+};
 
 export default Result;

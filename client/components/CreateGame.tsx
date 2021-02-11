@@ -11,7 +11,7 @@ type UserInput = {
 };
 
 const CreateGame: React.FC = React.memo(() => {
-  const { setSocket } = useContext(GlobalContext);
+  const { setSocket, setHost } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 
@@ -20,10 +20,11 @@ const CreateGame: React.FC = React.memo(() => {
       username: values.category,
       number_of_questions: values.number_of_questions,
     };
-    const ws = new WebSocket('ws://127.0.0.1:3000');
+    const ws = new WebSocket('ws://76.214.40.140:3000');
     ws.onopen = () => {
       setSocket(ws);
-      history.push('/lobby');
+      setHost(true);
+      history.push('/game');
     };
     // axios
     //   .post('/createGame', body)

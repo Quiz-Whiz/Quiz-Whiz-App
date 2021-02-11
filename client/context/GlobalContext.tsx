@@ -14,7 +14,9 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
   const [name, setName] = useState<string>('');
   const [question, setQuestion] = useState<string>('');
   const [answers, setAnswers] = useState<any>({});
-  const [results, setResults] = useState<any>([{ username: 'cole', score: 10 }, { username: 'vince', score: 420 }, { username: 'derek', score: 69 }]);
+  const [results, setResults] = useState<any>([]);
+  const [showResults, setShowResults] = useState<boolean>(false);
+  const [showGame, setShowGame] = useState<boolean>(false);
   const [globalRedirect, setGlobalRedirect] = useState<boolean>(false);
   const [host, setHost] = useState<boolean>(false);
   const [endGame, setEndGame] = useState<boolean>(true);
@@ -23,7 +25,7 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
 
   const value = {
     // eslint-disable-next-line max-len
-    socket, setSocket, gameID, setGameID, players, setPlayers, name, setName, question, setQuestion, answers, setAnswers, results, setResults, globalRedirect, setGlobalRedirect, host, setHost, endGame, setEndGame, rating, setRating, username, setUsername,
+    socket, setSocket, gameID, setGameID, players, setPlayers, name, setName, question, setQuestion, answers, setAnswers, results, setResults, showResults, setShowResults, globalRedirect, setGlobalRedirect, host, setHost, endGame, setEndGame, rating, setRating, username, setUsername, showGame, setShowGame,
   };
   return (<GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>);
 });

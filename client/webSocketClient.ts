@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
 import { GlobalContext } from './context/GlobalContext';
 
 const ws = (URL:string, history: any) => {
