@@ -1,14 +1,11 @@
 .signupPage {
-    background: #2F3E46;
     margin-top: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 20rem;
+    margin: auto;
 }
 
 .signupForm {
     height: 790px;
-    width: 20rem;
     padding: 3rem;
     box-sizing: border-box;
     background: #2F3E46;
@@ -35,17 +32,3 @@
     font-size: 25px;
     color: #262d30;
 }
-
-
-/* form input {
-    width: 100%;
-    height: 60px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-    border-radius: 7px;
-    font-size: 20px;
-    background: rgb(145, 149, 150);
-    color: #262d30; */
-
-
-/* } */

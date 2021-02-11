@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/Login.css';
 import { GlobalContext } from '../context/GlobalContext';
+import '../stylesheets/CreateGame.css';
 
 type UserInput = {
   category: string,
@@ -66,16 +67,23 @@ const CreateGame: React.FC = React.memo(() => {
       <div className="createGameForm">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="number_of_questions">
-            Number of Questions
+            Number of Questions:
             <input name="number_of_questions" id="number_of_questions" ref={register} />
           </label>
+          <br/>
+          <br/>
           <label htmlFor="category">
             Category
+            <br/>
+            <br/>
             <select name="category" id="category" ref={register}>
               <option value="All categories">All Categories</option>
               <option value="Science">Science</option>
             </select>
           </label>
+          <br/>
+          <br/>
+          <br/>
           <div className="submitBtn">
             <input className="generic_button" type="submit" />
           </div>

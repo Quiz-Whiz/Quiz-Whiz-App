@@ -30,12 +30,14 @@ const GameRound: React.FC = (answer) => {
   }
 
   return (
-    <div className="gameContainer">
-      <div>
-        {question}
-      </div>
-      <div>
-        {answers}
+    <div className="gameRoundPage">
+      <div className="gameContainer">
+        <div>
+          {question}
+        </div>
+        <div>
+          {answers}
+        </div>
       </div>
     </div>
   );
