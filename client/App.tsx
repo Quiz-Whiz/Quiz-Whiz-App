@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import Login from './components/Login';
 // import SignUp
 // import MainPage
-// import CreateGame
+import CreateGame from './components/CreateGame';
 // import JoinGame
 import Lobby from './components/Lobby'
 // import Game
@@ -14,7 +14,7 @@ import Lobby from './components/Lobby'
 const App: React.FC = React.memo(() => (
   <Switch>
     <Route path="/">
-      <Lobby />
+      <CreateGame />
     </Route>
     <Route path="/signUp">
     </Route>

@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { GlobalContext } from './context/GlobalContext';
 
-const ws = (URL:string) => {
-  const history = useHistory();
+const ws = (URL:string, history: any) => {
+  console.log('hello');
   const { username, setPlayers, setQuestion, setGlobalRedirect, setResults } = useContext(GlobalContext);
   const client = new WebSocket(URL);
   client.onopen = () => {

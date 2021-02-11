@@ -4,14 +4,13 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/Login.css';
 import { GlobalContext } from '../context/GlobalContext';
-import ws from '../webSocketClient';
 
 type UserInput = {
   category: string,
   number_of_questions: string,
 };
 
-const Login: React.FC = React.memo(() => {
+const CreateGame: React.FC = React.memo(() => {
   const { setSocket } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
@@ -21,22 +20,27 @@ const Login: React.FC = React.memo(() => {
       username: values.category,
       number_of_questions: values.number_of_questions,
     };
-    axios
-      .post('/createGame', body)
-      .then((res : any) => {
-        if (res.status !== 200) {
-          const gameForm = document.getElementsByClassName('createGameForm')[0];
-          const div = document.createElement('div');
-          div.innerHTML = 'Unable to create a game try again';
-          gameForm.appendChild(div);
-        } else {
-          // import ws
-          setSocket(ws(res.data));
-        }
-      })
-      .catch((error) => {
-        console.log({ ...error });
-      });
+    const ws = new WebSocket('ws://127.0.0.1:3000');
+    ws.onopen = () => {
+      setSocket(ws);
+      history.push('/lobby');
+    };
+    // axios
+    //   .post('/createGame', body)
+    //   .then((res : any) => {
+    //     if (res.status !== 200) {
+    //       const gameForm = document.getElementsByClassName('createGameForm')[0];
+    //       const div = document.createElement('div');
+    //       div.innerHTML = 'Unable to create a game try again';
+    //       gameForm.appendChild(div);
+    //     } else {
+    //       // import ws
+    //       setSocket(ws('wss://localhost:3000'));
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log({ ...error });
+    //   });
   };
   return (
     <div className="createGamePage">
@@ -62,4 +66,4 @@ const Login: React.FC = React.memo(() => {
   );
 });
 
-export default Login;
+export default CreateGame;

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import '../stylesheets/Login.css';
 import { GlobalContext } from '../context/GlobalContext';
 
 const Lobby: React.FC = React.memo(() => {
