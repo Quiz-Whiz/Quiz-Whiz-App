@@ -1,10 +1,4 @@
-/* ------Login Page----- */
-
-* {
-    font-family: 'Josefin Sans', sans-serif;
-}
-
-.mainPage {
+.gameRoundPage {
     margin-top: 0px;
     display: flex;
     justify-content: center;
@@ -12,12 +6,7 @@
     align-self: center;
 }
 
-#rating {
-    color: #eef00b;
-    font-size: 48px;
-}
-
-.mainContainer {
+.gameContainer {
     /* width: 375px; */
     text-align: center;
     height: 790px;
@@ -30,20 +19,11 @@
     border-radius: 0.625rem;
 }
 
-
-/* .lo input {
+.gameBtn {
     width: 100%;
-    height: 25px;
-    border-radius: 1px;
-    font-size: 15px;
-    margin-bottom: 10px;
-} */
-
-.mainPgBtn {
-    width: 100%;
-    height: 60px;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 30px;
     border-radius: 7px;
     font-size: 20px;
     background: rgb(145, 149, 150);

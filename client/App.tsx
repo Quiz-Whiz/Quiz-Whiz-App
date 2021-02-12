@@ -11,7 +11,7 @@ import Game from './components/Game';
 const App: React.FC = React.memo(() => (
   <Switch>
     <Route exact path="/">
-      <CreateGame />
+      <JoinGame />
     </Route>
     <Route path="/signUp">
       <SignUp />

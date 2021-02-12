@@ -59,7 +59,7 @@ const JoinGame: React.FC = React.memo(() => {
       });
   };
   return (
-    <div className="joinGame">
+    <div className="joinGame" contentEditable>
       <div className="joinForm">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="access_code">

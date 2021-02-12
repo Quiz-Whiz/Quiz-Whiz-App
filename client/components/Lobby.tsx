@@ -28,7 +28,7 @@ const Lobby = (players:string[]) => {
     );
   }
   return (
-    <div className="lobbyPage">
+    <div className="lobbyPage" contentEditable>
       <div className="lobbyContainer">
         <div className="lobbyHeader">
           Lobby:
@@ -37,7 +37,9 @@ const Lobby = (players:string[]) => {
         <div id="users">
           {users}
         </div>
-        {startButton}
+        <div className="startGameBtn">
+           {startButton}
+        </div>
       </div>
     </div>
   );

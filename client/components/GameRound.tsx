@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import '../stylesheets/GameRound.css';
 
 const GameRound: React.FC = (answer) => {
   const { question, incorrect_answers, socket, username } = useContext(GlobalContext);
@@ -17,7 +18,7 @@ const GameRound: React.FC = (answer) => {
 
   const answers:JSX.Element[] = [];
   const createAnswerElement = (answerText:string) => (
-    <div>
+    <div className="gameBtn">
       <input type="button" value={answerText} onClick={() => onSubmit(answerText)} />
     </div>
   );
@@ -32,10 +33,10 @@ const GameRound: React.FC = (answer) => {
   return (
     <div className="gameRoundPage">
       <div className="gameContainer">
-        <div>
+        <div className="gameQuestions">
           {question}
         </div>
-        <div>
+        <div className="gameAnswers">
           {answers}
         </div>
       </div>

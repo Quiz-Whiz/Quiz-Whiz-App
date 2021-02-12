@@ -8,13 +8,13 @@ const MainPage: React.FC = React.memo(() => {
   const { username, rating } = useContext(GlobalContext);
   console.log("username", username);
   return (
-    <div className="mainPage">
+    <div className="mainPage" contentEditable>
       <div className="mainContainer">
-        Hello,
+        H<span style={{color: "#ad229d"}}>e</span>llo,
         {username}
         <br />
         <br />
-        Current Ranking:
+        Curr<span style={{color: "#1ae611"}}>e</span>nt R<span style={{color: "red"}}>a</span>nking:
         <br />
         <br />
         <br />
