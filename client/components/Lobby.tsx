@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
+import '../stylesheets/Lobby.css';
 
 const Lobby = (players:string[]) => {
   const { socket, host, accessCode } = useContext(GlobalContext);
@@ -28,10 +29,11 @@ const Lobby = (players:string[]) => {
     );
   }
   return (
-    <div className="lobbyPage" contentEditable>
+    <div className="lobbyPage" >
       <div className="lobbyContainer">
         <div className="lobbyHeader">
-          Lobby:
+        <span style={{color: "#ad229d"}}>L</span>ob<span style={{color: "#1ae611"}}>b</span>y:
+          <br/>
           {accessCode}
         </div>
         <div id="users">

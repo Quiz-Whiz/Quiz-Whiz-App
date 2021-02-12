@@ -22,13 +22,7 @@ const CreateGame: React.FC = React.memo(() => {
       category: values.category,
       amount: values.number_of_questions,
     };
-    // ws://localhost:port
-    // const ws = new WebSocket('ws://76.214.40.140:3000');
-    // ws.onopen = () => {
-    //   setSocket(ws);
-    //   setHost(true);
-    //   history.push('/game');
-    // };
+
     axios
       .post('/api/createGame', body)
       .then((res : any) => {
@@ -39,12 +33,10 @@ const CreateGame: React.FC = React.memo(() => {
           gameForm.appendChild(div);
         } else {
           // import ws
-          console.log(res);
           setAccessCode(res.data.code);
           const port = res.data.port;
           const IP = 'ws://76.214.40.140:';
           const URLstring = IP + port;
-          console.log(URLstring);
           const ws = new WebSocket(URLstring);
           ws.onopen = () => {
             setSocket(ws);

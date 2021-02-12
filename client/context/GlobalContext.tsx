@@ -15,6 +15,7 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
   const [question, setQuestion] = useState<string>('');
   const [answer, setAnswer] = useState<string>('');
   const [incorrectAnswers, setIncorrectAnswers] = useState<any>([]);
+  const [previousAnswer, setPreviousAnswer] = useState<string>('');
   const [results, setResults] = useState<any>([]);
   const [showResults, setShowResults] = useState<boolean>(false);
   const [showGame, setShowGame] = useState<boolean>(false);
@@ -27,7 +28,7 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
 
   const value = {
     // eslint-disable-next-line max-len
-    socket, setSocket, gameID, setGameID, players, setPlayers, name, setName, question, setQuestion, answer, setAnswer, incorrectAnswers, setIncorrectAnswers, results, setResults, showResults, setShowResults, globalRedirect, setGlobalRedirect, host, setHost, endGame, setEndGame, rating, setRating, username, setUsername, showGame, setShowGame, accessCode, setAccessCode,
+    socket, setSocket, gameID, setGameID, players, setPlayers, name, setName, question, setQuestion, answer, setAnswer, incorrectAnswers, setIncorrectAnswers, previousAnswer, setPreviousAnswer, results, setResults, showResults, setShowResults, globalRedirect, setGlobalRedirect, host, setHost, endGame, setEndGame, rating, setRating, username, setUsername, showGame, setShowGame, accessCode, setAccessCode,
   };
   return (<GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>);
 });

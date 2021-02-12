@@ -5,36 +5,21 @@ import Result from './Results';
 import GameRound from './GameRound';
 
 const Game: React.FC = () => {
-  const { socket, players, setPlayers, results, setResults, showResults, setShowResults, setQuestion, answer, setAnswer, setIncorrectAnswers, showGame, setShowGame } = useContext(GlobalContext);
+  const { socket, players, setPlayers, results, setResults, showResults, setShowResults, setQuestion, answer, setAnswer, setIncorrectAnswers, previousAnswer, setPreviousAnswer, showGame, setShowGame } = useContext(GlobalContext);
 
   const gameTime = () => {
     setShowGame(true);
     setShowResults(false);
   };
+  setShowGame(true);
 
   const gameOver = () => {
     setShowResults(false);
   };
 
-  // {
-  //   type: 'firstRound || newRound',
-  //   data:  {
-    //     "category": "Entertainment: Japanese Anime & Manga",
-    //     "type": "multiple",
-    //     "difficulty": "easy",
-    //     "question": "What is the age of Ash Ketchum in Pokemon when he starts his journey?",
-    //     "correct_answer": "10",
-    //     "incorrect_answers": [
-    //         "11",
-    //         "12",
-    //         "9"
-    //     ]
-    // },
-  //   scores: [],
-  //   isGameOver: this.isGameOver()
-  // }
   const updateResultsAndQuestions = (message:any) => {
     if (message.data.question !== null) {
+      setPreviousAnswer(answer)
       setQuestion(message.data.question);
       setAnswer(message.data.correct_answer);
       setIncorrectAnswers(message.data.incorrect_answers);
@@ -67,7 +52,7 @@ const Game: React.FC = () => {
   };
   if (showResults) {
     console.log('Rendering Results');
-    return Result(results);
+    return Result(results, previousAnswer);
   }
   if (showGame) {
     return GameRound(answer);

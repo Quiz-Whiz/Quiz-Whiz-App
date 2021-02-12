@@ -11,9 +11,9 @@
     width: 20rem;
     padding: 3rem;
     box-sizing: border-box;
-    background: rgba(235, 235, 235, 0.685);
+    background: #2F3E46;
     font-size: 30px;
-    color: #535353;
+    color: white;
     border-radius: 0.625rem;
 }
 

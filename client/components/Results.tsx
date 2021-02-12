@@ -1,12 +1,12 @@
 import React from 'react';
+import '../stylesheets/Results.css';
 
 type Player = {
   username: string,
   score: number
 };
-const Result = (results:Player[]) => {
+const Result = (results:Player[], previousAnswer:string) => {
   const scores:JSX.Element[] = [];
-  // sort up here
   results.sort((a, b) => b.score - a.score);
   for (let i = 0; i < results.length; i += 1) {
     const score = (
@@ -21,8 +21,8 @@ const Result = (results:Player[]) => {
   return (
     <div className="resultsPage">
       <div className="resultsContainer">
-        <div className="resultsHeader">
-          Leader Board:
+        <div className="resultsHeader" >
+        <span style={{color: "#ad229d"}}>L</span>ea<span style={{color: "#1ae611"}}>d</span>erb<span style={{color: "red"}}>o</span>ar<span style={{color: "#eef00b"}}>d</span>:
         </div>
         <br />
         {scores}

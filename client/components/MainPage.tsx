@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import '../stylesheets/MainPage.css';
-// import context
 import { GlobalContext } from '../context/GlobalContext';
 
 const MainPage: React.FC = React.memo(() => {
   const { username, rating } = useContext(GlobalContext);
   console.log("username", username);
   return (
-    <div className="mainPage" contentEditable>
+    <div className="mainPage" >
       <div className="mainContainer">
         H<span style={{color: "#ad229d"}}>e</span>llo,
+        <br/>
+        <br/>
         {username}
         <br />
         <br />
@@ -19,9 +20,6 @@ const MainPage: React.FC = React.memo(() => {
         <br />
         <br />
         <div id="rating">{rating}</div>
-        <br />
-        <br />
-        <br />
         <br />
         <br />
         <br />

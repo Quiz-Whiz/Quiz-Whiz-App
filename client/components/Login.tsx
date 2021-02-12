@@ -4,7 +4,6 @@ import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/Login.css';
 import logo from '../assets/logo.png';
-// import context;
 import { GlobalContext } from '../context/GlobalContext';
 
 type UserInput = {
@@ -55,7 +54,7 @@ const Login: React.FC = React.memo(() => {
       <br />
       <br />
       <div className="loginForm">
-        <div className="loginHeader" contentEditable>
+        <div className="loginHeader" >
           J<span style={{color: "#ad229d"}}>u</span>st Anot<span style={{color: "#1ae611"}}>h</span>er <span style={{color: "red"}}></span> Qu<span style={{color: "#eef00b"}}>i</span>z <span style={{color: "red"}}>A</span>pp
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>

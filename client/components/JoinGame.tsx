@@ -67,7 +67,7 @@ const JoinGame: React.FC = React.memo(() => {
             <input name="access_code" id="access_code" ref={register} />
           </label>
           <div className="submitBtn">
-            <input className="generic_button" type="submit" />
+            <input className="generic_button" type="submit" style={{color: "#535353"}}/>
           </div>
         </form>
       </div>
