@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../context/GlobalContext';
 
 const GameRound: React.FC = (answer) => {
-  const { question, incorrect_answers, socket, username } = useContext(GlobalContext);
+  const { question, incorrectAnswers, socket, username } = useContext(GlobalContext);
 
   const onSubmit = (text:string) => {
     const msg = {
@@ -12,6 +12,7 @@ const GameRound: React.FC = (answer) => {
         username,
       },
     };
+    console.log(msg);
     socket.send(JSON.stringify(msg));
   };
 
@@ -21,8 +22,8 @@ const GameRound: React.FC = (answer) => {
       <input type="button" value={answerText} onClick={() => onSubmit(answerText)} />
     </div>
   );
-  incorrect_answers.push(answer);
-  const correctAndIncorrect = incorrect_answers;
+  incorrectAnswers.push(answer);
+  const correctAndIncorrect = incorrectAnswers;
   while (correctAndIncorrect.length > 0) {
     const randomChoice = Math.floor(Math.random() * correctAndIncorrect.length);
     answers.push(createAnswerElement(correctAndIncorrect[randomChoice]));

@@ -21,6 +21,7 @@
         "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
         "cypress": "^6.4.0",
+        "decode-html": "^2.0.0",
         "dotenv": "^8.2.0",
         "enzyme": "^3.11.0",
         "express": "^4.17.1",

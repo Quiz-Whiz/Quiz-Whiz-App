@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const ws = require('ws');
-const { createGame } = require('./controllers/gameController');
+const decode = require('decode-html');
 
 class Game {
   constructor(questions, port) {
@@ -12,7 +12,7 @@ class Game {
     this.questions = questions;
     this.round = 0;
     this.playerAnswers = 0;
-  };
+  }
 
   //unique user/server number (we hope)
 genID() {
@@ -57,6 +57,7 @@ createServer(port) {
           return;
         
         case "startGame":
+          this.parseQuestions();
           let firstRound = this.sendRound();
           firstRound.type = 'firstRound';
           wss.clients.forEach(client => {
@@ -65,24 +66,22 @@ createServer(port) {
           return;
 
         case "answer":
-          
           this.playerAnswers++;
           
           //increment score for correct answer
           if (message.data.answer) {
             this.players[message.data.username].score += 10;
           }
-          
+
           //if game isn't over, send new question, and results
           if (this.playerAnswers >= this.playerCount) {
-            let result = this.sendRound()
+            this.round++;
+            this.playerAnswers = 0;
+            let result = this.sendRound();
             wss.clients.forEach(client => {
               client.send(JSON.stringify(result));
             })
-            this.playerAnswers = 0;
           }
-          
-          this.round++
           return;
         
         default: 
@@ -92,11 +91,10 @@ createServer(port) {
     })
   })
   
-  server.listen(port)
+  server.listen(port);
   return wss;
 }
 
-//addPlayer
 addPlayer(username) {
   
   this.players[username] = {
@@ -106,8 +104,6 @@ addPlayer(username) {
   this.playerCount++;
 }
 
-
-//removePlayer
 removePlayer(username) {
   delete this.players[username];
   this.playerCount--;
@@ -118,22 +114,36 @@ sendRound() {
   for (const player in this.players) {
     currentScores.push({
       username: player,
-      score: player.score
+      score: this.players[player].score
     })
   }
   const newRound = {
     type: 'newRound',
     data: this.questions[this.round] || null,
     scores: currentScores,
-    isGameOver: this.isGameOver()
+    isGameOver: this.isGameOver(),
   }
   return newRound;
 }
 
-//iGO
 isGameOver() {
   return this.round >= this.questions.length;
-  }
 }
 
+convert(str)
+  {
+    str = decode(str);
+    str = str.replace(/&#039;/g, "'");
+    return str;
+  }
+  parseQuestions() {
+    for(let i = 0; i < this.questions.length; i++) {
+      this.questions[i].question = this.convert(this.questions[i].question);
+      this.questions[i].correct_answer = this.convert(this.questions[i].correct_answer);
+      this.questions[i].incorrect_answers[0] = this.convert(this.questions[i].incorrect_answers[0]);
+      this.questions[i].incorrect_answers[1] = this.convert(this.questions[i].incorrect_answers[1]);
+      this.questions[i].incorrect_answers[2] = this.convert(this.questions[i].incorrect_answers[2]);
+    }
+  }
+}
 module.exports = Game;
