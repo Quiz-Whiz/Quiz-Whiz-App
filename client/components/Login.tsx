@@ -13,12 +13,12 @@ type UserInput = {
 };
 
 const Login: React.FC = React.memo(() => {
-  const { username, setUsername, rating, setRating } = useContext(GlobalContext);
+  const { setUsername, setRating } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
   const pushHistory = () => {
     history.push('/mainPage');
-  }
+  };
   const onSubmit = (values : UserInput) => {
     console.log(values);
     const body = {

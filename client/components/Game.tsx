@@ -34,24 +34,26 @@ const Game: React.FC = () => {
   //   isGameOver: this.isGameOver()
   // }
   const updateResultsAndQuestions = (message:any) => {
-    setQuestion(message.data.question);
-    setAnswer(message.data.correct_answer);
-    setIncorrectAnswers(message.data.incorrect_answers);
+    if (message.data.question !== null) {
+      setQuestion(message.data.question);
+      setAnswer(message.data.correct_answer);
+      setIncorrectAnswers(message.data.incorrect_answers);
+    }
     setResults(message.scores);
   };
 
   socket.onmessage = (event:any) => {
-    console.log(event);
     const message = JSON.parse(event.data);
     console.log(message);
     if (message.type === 'newRound') {
       console.log('SUP IN new Round');
       setShowGame(false);
       setShowResults(true);
-      updateResultsAndQuestions(message);
       if (message.isGameOver) {
+        setResults(message.scores);
         setTimeout(gameOver, 4000);
       } else {
+        updateResultsAndQuestions(message);
         setTimeout(gameTime, 4000);
       }
     }

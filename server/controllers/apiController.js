@@ -12,13 +12,13 @@ exports.getSessionToken = (req, res, next) => {
 }
 
 exports.getQuestions = (req, res, next) => {
-  
+  const amount = req.body.amount;
   const token = res.locals.token;
-  let url = `https://opentdb.com/api.php?amount=3&type=multiple&token=${token}`;
+  let url = `https://opentdb.com/api.php?amount=${amount}&type=multiple&token=${token}`;
   fetch(url)
   .then(response => response.json())
   .then(questions => {
-    res.locals.questions = questions.results
+    res.locals.questions = questions.results;
     return next();
   })
   
