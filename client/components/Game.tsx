@@ -11,19 +11,16 @@ const Game: React.FC = () => {
     setShowGame(true);
     setShowResults(false);
   };
-  setShowGame(true);
 
   const gameOver = () => {
     setShowResults(false);
   };
 
   const updateResultsAndQuestions = (message:any) => {
-    if (message.data.question !== null) {
-      setPreviousAnswer(answer)
-      setQuestion(message.data.question);
-      setAnswer(message.data.correct_answer);
-      setIncorrectAnswers(message.data.incorrect_answers);
-    }
+    setQuestion(message.data.question);
+    setAnswer(message.data.correct_answer);
+    setIncorrectAnswers(message.data.incorrect_answers);
+    setPreviousAnswer(answer);
     setResults(message.scores);
   };
 
@@ -35,6 +32,7 @@ const Game: React.FC = () => {
       setShowGame(false);
       setShowResults(true);
       if (message.isGameOver) {
+        setPreviousAnswer(answer);
         setResults(message.scores);
         setTimeout(gameOver, 4000);
       } else {

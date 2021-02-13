@@ -15,6 +15,8 @@ const Lobby = (players:string[]) => {
   const User = (username: string) => (
     <div>
       {username}
+      <br />
+      <br />
     </div>
   );
   for (let i = 0; i < players.length; i += 1) {

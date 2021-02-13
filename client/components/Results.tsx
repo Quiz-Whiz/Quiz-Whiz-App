@@ -13,7 +13,10 @@ const Result = (results:Player[], previousAnswer:string) => {
       <div>
         { results[i].username }
         :
+        {'  '}
         {results[i].score}
+        <br />
+        <br />
       </div>
     );
     scores.push(score);
@@ -22,14 +25,20 @@ const Result = (results:Player[], previousAnswer:string) => {
     <div className="resultsPage">
       <div className="resultsContainer">
         <div className="resultsHeader" >
-        <span style={{color: "#ad229d"}}>L</span>ea<span style={{color: "#1ae611"}}>d</span>erb<span style={{color: "red"}}>o</span>ar<span style={{color: "#eef00b"}}>d</span>:
+          <span style={{color: '#ad229d'}}>L</span>ea<span style={{color: '#1ae611'}}>d</span>erb<span style={{color: 'red'}}>o</span>ar<span style={{color: '#eef00b'}}>d</span>:
         </div>
         <br />
+        <div>
+          <span>Correct answer:</span>
+        </div>
+        <br />
+        <div>
+          <span>{previousAnswer}</span>
+        </div>
+        <br />
+        <br />
+        <br />
         {scores}
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
         <br />
       </div>
