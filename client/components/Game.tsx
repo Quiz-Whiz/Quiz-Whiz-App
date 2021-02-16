@@ -5,7 +5,11 @@ import Result from './Results';
 import GameRound from './GameRound';
 
 const Game: React.FC = () => {
-  const { socket, players, setPlayers, results, setResults, showResults, setShowResults, setQuestion, answer, setAnswer, setIncorrectAnswers, previousAnswer, setPreviousAnswer, showGame, setShowGame } = useContext(GlobalContext);
+  const {
+    socket, players, setPlayers, results, setResults, showResults, setShowResults,
+    setQuestion, answer, setAnswer, setIncorrectAnswers, previousAnswer,
+    setPreviousAnswer, showGame, setShowGame,
+  } = useContext(GlobalContext);
 
   const gameTime = () => {
     setShowGame(true);

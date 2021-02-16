@@ -5,17 +5,23 @@ import { GlobalContext } from '../context/GlobalContext';
 
 const MainPage: React.FC = React.memo(() => {
   const { username, rating } = useContext(GlobalContext);
-  console.log("username", username);
+  console.log('username', username);
   return (
-    <div className="mainPage" >
+    <div className="mainPage">
       <div className="mainContainer">
-        H<span style={{color: "#ad229d"}}>e</span>llo,
-        <br/>
-        <br/>
+        H
+        <span style={{ color: '#ad229d' }}>e</span>
+        llo,
+        <br />
+        <br />
         {username}
         <br />
         <br />
-        Curr<span style={{color: "#1ae611"}}>e</span>nt R<span style={{color: "red"}}>a</span>nking:
+        Curr
+        <span style={{ color: '#1ae611' }}>e</span>
+        nt R
+        <span style={{ color: 'red' }}>a</span>
+        nking:
         <br />
         <br />
         <br />

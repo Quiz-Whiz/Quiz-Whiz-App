@@ -3,7 +3,9 @@ import { GlobalContext } from './context/GlobalContext';
 
 const ws = (URL:string, history: any) => {
   console.log('hello');
-  const { username, setPlayers, setQuestion, setGlobalRedirect, setResults } = useContext(GlobalContext);
+  const {
+    username, setPlayers, setQuestion, setGlobalRedirect, setResults,
+  } = useContext(GlobalContext);
   const client = new WebSocket(URL);
   client.onopen = () => {
     // add all event listeners before sending any data

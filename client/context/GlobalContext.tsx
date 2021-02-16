@@ -25,10 +25,12 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
   const [rating, setRating] = useState<number>(1);
   const [username, setUsername] = useState<string>('');
   const [accessCode, setAccessCode] = useState<string>('');
+  // insert IP address below
+  const [IP, setIP] = useState<string>('172.91.65.139');
 
   const value = {
     // eslint-disable-next-line max-len
-    socket, setSocket, gameID, setGameID, players, setPlayers, name, setName, question, setQuestion, answer, setAnswer, incorrectAnswers, setIncorrectAnswers, previousAnswer, setPreviousAnswer, results, setResults, showResults, setShowResults, globalRedirect, setGlobalRedirect, host, setHost, endGame, setEndGame, rating, setRating, username, setUsername, showGame, setShowGame, accessCode, setAccessCode,
+    socket, setSocket, gameID, setGameID, players, setPlayers, name, setName, question, setQuestion, answer, setAnswer, incorrectAnswers, setIncorrectAnswers, previousAnswer, setPreviousAnswer, results, setResults, showResults, setShowResults, globalRedirect, setGlobalRedirect, host, setHost, endGame, setEndGame, rating, setRating, username, setUsername, showGame, setShowGame, accessCode, setAccessCode, IP, setIP,
   };
   return (<GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>);
 });

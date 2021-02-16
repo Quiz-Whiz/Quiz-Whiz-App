@@ -12,7 +12,9 @@ type UserInput = {
 };
 
 const CreateGame: React.FC = React.memo(() => {
-  const { setSocket, setHost, username, setPlayers, setAccessCode} = useContext(GlobalContext);
+  const {
+    setSocket, setHost, username, setAccessCode, IP,
+  } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 
@@ -34,9 +36,8 @@ const CreateGame: React.FC = React.memo(() => {
         } else {
           // import ws
           setAccessCode(res.data.code);
-          const port = res.data.port;
-          const IP = 'ws://76.214.40.140:';
-          const URLstring = IP + port;
+          const { port } = res.data;
+          const URLstring = `${IP}:${port}`;
           const ws = new WebSocket(URLstring);
           ws.onopen = () => {
             setSocket(ws);
@@ -62,20 +63,20 @@ const CreateGame: React.FC = React.memo(() => {
             Number of Questions:
             <input name="number_of_questions" id="number_of_questions" ref={register} />
           </label>
-          <br/>
-          <br/>
+          <br />
+          <br />
           <label htmlFor="category">
             Category
-            <br/>
-            <br/>
+            <br />
+            <br />
             <select name="category" id="category" ref={register}>
               <option value="All categories">All Categories</option>
               <option value="Science">Science</option>
             </select>
           </label>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
           <div className="submitBtn">
             <input className="generic_button" type="submit" />
           </div>

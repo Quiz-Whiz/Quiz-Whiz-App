@@ -1,9 +1,10 @@
 const express = require('express');
-const app = express();
-const PORT = 3000;
 const path = require('path');
 const apiRouter = require('./api.js');
 require('dotenv').config();
+
+const app = express();
+const PORT = 3000;
 
 app.use(express.static('client'));
 
@@ -21,9 +22,9 @@ app.use((req, res) => res.sendStatus(404));
 // need global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: "Express error handler caught unknown middleware error",
+    log: 'Express error handler caught unknown middleware error',
     status: 500,
-    message: { err: "An error occurred" },
+    message: { err: 'An error occurred' },
   };
   const errorObj = { ...defaultErr, ...err };
   return res.status(errorObj.status).send(errorObj.message);

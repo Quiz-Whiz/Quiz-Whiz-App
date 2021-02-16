@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../stylesheets/JoinGame.css';
-
 import { GlobalContext } from '../context/GlobalContext';
 
 type AccessCode = {
@@ -11,7 +10,9 @@ type AccessCode = {
 };
 
 const JoinGame: React.FC = React.memo(() => {
-  const { setSocket, username, setPlayers, setAccessCode } = useContext(GlobalContext);
+  const {
+    setSocket, username, setPlayers, setAccessCode, IP,
+  } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
 
@@ -31,8 +32,7 @@ const JoinGame: React.FC = React.memo(() => {
           loginForm.appendChild(div);
         } else {
           const port = res.data;
-          const IP = 'ws://76.214.40.140:';
-          const URLstring = IP + port;
+          const URLstring = `${IP}:${port}`;
           setAccessCode(res.data.code);
           console.log(URLstring);
           const ws = new WebSocket(URLstring);
@@ -63,11 +63,11 @@ const JoinGame: React.FC = React.memo(() => {
       <div className="joinForm">
         <form onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="access_code">
-            Access Code: 
+            Access Code:
             <input name="access_code" id="access_code" ref={register} />
           </label>
           <div className="submitBtn">
-            <input className="generic_button" type="submit" style={{color: "#535353"}}/>
+            <input className="generic_button" type="submit" style={{ color: '#535353' }} />
           </div>
         </form>
       </div>

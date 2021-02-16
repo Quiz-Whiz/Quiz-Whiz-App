@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -11,7 +11,9 @@ type UserInput = {
 };
 
 const SignUp: React.FC = React.memo(() => {
-  const { username, setUsername, rating, setRating } = useContext(GlobalContext);
+  const {
+    setUsername, setRating,
+  } = useContext(GlobalContext);
   const { register, handleSubmit } = useForm();
   const history = useHistory();
   const onSubmit = (values: UserInput) => {

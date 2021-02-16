@@ -31,18 +31,21 @@ const Lobby = (players:string[]) => {
     );
   }
   return (
-    <div className="lobbyPage" >
+    <div className="lobbyPage">
       <div className="lobbyContainer">
         <div className="lobbyHeader">
-        <span style={{color: "#ad229d"}}>L</span>ob<span style={{color: "#1ae611"}}>b</span>y:
-          <br/>
+          <span style={{ color: '#ad229d' }}>L</span>
+          ob
+          <span style={{ color: '#1ae611' }}>b</span>
+          y:
+          <br />
           {accessCode}
         </div>
         <div id="users">
           {users}
         </div>
         <div className="startGameBtn">
-           {startButton}
+          {startButton}
         </div>
       </div>
     </div>
