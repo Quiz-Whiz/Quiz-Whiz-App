@@ -9,9 +9,10 @@ module.exports = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
+    disableHostCheck: true,
     publicPath: '/',
     proxy: {
-      '/api/**': 'http://localhost:3000/'
+      '/api/**': 'http://localhost:3000/',
     },
   },
   module: {
@@ -36,10 +37,25 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.(jpg|jpeg|png|ttf|svg)$/,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              name: 'assets/[name].[ext]',
+              mozjpeg: {
+                quality: 10,
+              },
+            },
+          },
+        ],
+        exclude: /node_modules/,
+      },
     ],
   },
-  mode: 'development',
   plugins: [
     new HtmlWebpackPlugin({
       template: 'client/index.html',

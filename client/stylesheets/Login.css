@@ -1,0 +1,77 @@
+    /* ------Login Page----- */
+    
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+    * {
+        font-family: 'Josefin Sans', sans-serif;
+    }
+    
+    .loginPage {
+        margin-top: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .loginBg {
+        border-radius: 0.625rem;
+    }
+    
+    .loginHeader {
+        text-align: center;
+        font-size: 40px;
+        margin-bottom: 90px;
+        margin-left: -10px;
+    }
+    
+    .loginForm {
+        height: 790px;
+        width: 20rem;
+        padding: 3rem;
+        box-sizing: border-box;
+        background: #2F3E46;
+        font-size: 20px;
+        color: white;
+        border-radius: 0.625rem;
+    }
+    
+    .loginForm input {
+        width: 100%;
+        height: 40px;
+        border-radius: 5px;
+        font-size: 15px;
+        margin-bottom: 10px;
+        font-size: 30px;
+    }
+    
+    .generic_button {
+        background: rgb(145, 149, 150);
+    }
+    
+    .submitBtn input {
+        width: 100%;
+        height: 60px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 7px;
+        font-size: 25px;
+        color: #262d30;
+    }
+    
+    .signup_link {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .main_link {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .bottomLinks {
+        text-align: center;
+        font-size: 20px;
+    }

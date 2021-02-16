@@ -1,0 +1,62 @@
+.createGamePage {
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createGameForm {
+    display: block;
+    text-align: center;
+    height: 790px;
+    width: 20rem;
+    padding: 3rem;
+    box-sizing: border-box;
+    background: #2F3E46;
+    font-size: 20px;
+    color: white;
+    border-radius: 0.625rem;
+}
+
+.createGameForm input {
+    width: 40%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.submitBtn input {
+    width: 100%;
+    height: 60px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 7px;
+    font-size: 25px;
+    color: #262d30;
+    text-align: center;
+}
+
+.generic_button {
+    background: rgb(145, 149, 150);
+    margin-top: 20px;
+}
+
+#category {
+    font-size: 15px
+}
+
+#number_of_questions {
+    height: 30px;
+}
+
+
+/* form {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+} */
