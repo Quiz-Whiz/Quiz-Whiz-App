@@ -24,17 +24,12 @@ const JoinGame: React.FC = React.memo(() => {
     axios
       .post('/api/joinPrivateGame', code)
       .then((res : any) => {
-        // if status
         if (res.status !== 200) {
-          const loginForm = document.getElementsByClassName('joinForm')[0];
-          const div = document.createElement('div');
-          div.innerHTML = 'Error incorrect access code';
-          loginForm.appendChild(div);
+          // set error state
         } else {
           const port = res.data;
           const URLstring = `ws://${IP}:${port}`;
           setAccessCode(res.data.code);
-          console.log(URLstring);
           const ws = new WebSocket(URLstring);
           ws.onopen = () => {
             setSocket(ws);

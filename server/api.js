@@ -6,13 +6,16 @@ const { createGame, joinPrivateGame } = require('./controllers/gameController');
 const router = express.Router();
 
 router.post('/signup', createUser, (req, res) => {
-  res.status(200).send('User has been created.');
+  if (res.locals.signUp) {
+    return res.sendStatus(200);
+  }
+  res.sendStatus(404);
 });
 
 router.post('/login', verifyUser, (req, res) => {
   console.log(res.locals.login);
   if (res.locals.login === true) {
-    res.status(200).json(res.locals.user);
+    return res.status(200).json(res.locals.user);
   }
   res.sendStatus(404);
 });
@@ -23,10 +26,9 @@ router.post('/createGame', getSessionToken, getQuestions, createGame, (req, res)
 
 router.post('/joinPrivateGame', joinPrivateGame, (req, res) => {
   if (res.locals.port) {
-    res.status(200).json(res.locals.port);
-  } else {
-    res.status(404).send('No such game exists.');
+    return res.status(200).json(res.locals.port);
   }
+  res.sendStatus(404);
 });
 
 module.exports = router;

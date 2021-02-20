@@ -26,10 +26,7 @@ const SignUp: React.FC = React.memo(() => {
       .post('/api/signup', body)
       .then((res : any) => {
         if (res.status !== 200) {
-          const loginForm = document.getElementsByClassName('signupForm')[0];
-          const div = document.createElement('div');
-          div.innerHTML = 'Username taken';
-          loginForm.appendChild(div);
+          // set error state here
         } else {
           setRating(1000);
           setUsername(values.user_name);

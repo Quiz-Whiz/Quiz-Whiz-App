@@ -28,10 +28,7 @@ const Login: React.FC = React.memo(() => {
       .then((res : any) => {
         // if status
         if (res.status !== 200) {
-          const loginForm = document.getElementsByClassName('loginForm')[0];
-          const div = document.createElement('div');
-          div.innerHTML = 'Username or Password incorrect';
-          loginForm.appendChild(div);
+          // set error state here
         } else {
           setTimeout(pushHistory, 500);
           console.log(res.data);
