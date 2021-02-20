@@ -37,7 +37,8 @@ const CreateGame: React.FC = React.memo(() => {
           // import ws
           setAccessCode(res.data.code);
           const { port } = res.data;
-          const URLstring = `${IP}:${port}`;
+          const URLstring = `ws://${IP}:${port}`;
+          console.log(URLstring);
           const ws = new WebSocket(URLstring);
           ws.onopen = () => {
             setSocket(ws);

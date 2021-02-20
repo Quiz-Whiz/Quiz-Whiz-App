@@ -25,7 +25,7 @@ export const GlobalProvider = React.memo(({ children }: Props) => {
   const [rating, setRating] = useState<number>(1);
   const [username, setUsername] = useState<string>('');
   const [accessCode, setAccessCode] = useState<string>('');
-  const [IP, setIP] = useState<string>('');
+  const [IP, setIP] = useState<string>('76.214.40.140');
 
   const value = {
     // eslint-disable-next-line max-len

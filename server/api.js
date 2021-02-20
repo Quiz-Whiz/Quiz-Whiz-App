@@ -10,7 +10,11 @@ router.post('/signup', createUser, (req, res) => {
 });
 
 router.post('/login', verifyUser, (req, res) => {
-  res.status(200).json(res.locals.user);
+  console.log(res.locals.login);
+  if (res.locals.login === true) {
+    res.status(200).json(res.locals.user);
+  }
+  res.sendStatus(404);
 });
 
 router.post('/createGame', getSessionToken, getQuestions, createGame, (req, res) => {

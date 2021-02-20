@@ -32,7 +32,7 @@ const JoinGame: React.FC = React.memo(() => {
           loginForm.appendChild(div);
         } else {
           const port = res.data;
-          const URLstring = `${IP}:${port}`;
+          const URLstring = `ws://${IP}:${port}`;
           setAccessCode(res.data.code);
           console.log(URLstring);
           const ws = new WebSocket(URLstring);
