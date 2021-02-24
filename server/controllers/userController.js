@@ -9,8 +9,12 @@ exports.createUser = (req, res, next) => {
       if (error) return next(error);
       const values = [username, hash, 1000];
       const query = 'INSERT INTO Users (username, password, rating) VALUES ($1, $2, $3)';
-      database.query(query, values, (errors, res) => {
-        if (errors) return next(errors);
+      database.query(query, values, (errors, data) => {
+        if (data === undefined) {
+          res.locals.signUp = false;
+          return next();
+        }
+        res.locals.signUp = true;
         return next();
       });
     });
@@ -21,13 +25,20 @@ exports.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   const values = [username];
   const query = 'SELECT * FROM Users WHERE username = $1';
-  database.query(query, values, (err, res2) => {
-    if (err) return next(err);
-    bcrypt.compare(password, res2.rows[0].password, (error, response) => {
-      if (!response) return next('incorrect password');
+  database.query(query, values, (err, data) => {
+    if (data.rows.length === 0) {
+      res.locals.login = false;
+      return next();
+    }
+    bcrypt.compare(password, data.rows[0].password, (error, response) => {
+      if (!response) {
+        res.locals.login = false;
+        return next();
+      }
+      res.locals.login = true;
       res.locals.user = {
-        username: res2.rows[0].username,
-        rating: res2.rows[0].rating,
+        username: data.rows[0].username,
+        rating: data.rows[0].rating,
       };
       return next();
     });

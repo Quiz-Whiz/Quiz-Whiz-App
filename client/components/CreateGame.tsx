@@ -29,15 +29,12 @@ const CreateGame: React.FC = React.memo(() => {
       .post('/api/createGame', body)
       .then((res : any) => {
         if (res.status !== 200) {
-          const gameForm = document.getElementsByClassName('createGameForm')[0];
-          const div = document.createElement('div');
-          div.innerHTML = 'Unable to create a game try again';
-          gameForm.appendChild(div);
+          // set error message here
         } else {
-          // import ws
           setAccessCode(res.data.code);
           const { port } = res.data;
-          const URLstring = `${IP}:${port}`;
+          const URLstring = `ws://${IP}:${port}`;
+          console.log(URLstring);
           const ws = new WebSocket(URLstring);
           ws.onopen = () => {
             setSocket(ws);

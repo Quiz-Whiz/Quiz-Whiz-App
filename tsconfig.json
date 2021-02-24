@@ -7,7 +7,6 @@
     "rootDir": "./",
     "outDir": "./build",
     "esModuleInterop": true,
-    "outDir": "./build",
     "sourceMap": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
