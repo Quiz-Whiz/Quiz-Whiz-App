@@ -7,7 +7,6 @@ import CreateGame from './components/CreateGame';
 import JoinGame from './components/JoinGame';
 import Game from './components/Game';
 
-
 const App: React.FC = React.memo(() => (
   <Switch>
     <Route exact path="/">

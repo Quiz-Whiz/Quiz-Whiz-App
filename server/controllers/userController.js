@@ -10,7 +10,6 @@ exports.createUser = (req, res, next) => {
       const values = [username, hash, 1000];
       const query = 'INSERT INTO Users (username, password, rating) VALUES ($1, $2, $3)';
       database.query(query, values, (errors, data) => {
-        console.log(data);
         if (data === undefined) {
           res.locals.signUp = false;
           return next();
